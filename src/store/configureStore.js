@@ -1,6 +1,12 @@
-import { configureStore } from "@reduxjs/toolkit";
-import reducer from "./projects";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import bugsReducer from "./bugs";
+import projectsReducer from "./projects";
 
-export default function CreateStore() {
-  return configureStore({ reducer });
+const rootReducer = combineReducers({
+  bugsReducer,
+  projectsReducer,
+});
+
+export default function rootReducers() {
+  return configureStore({ reducer: rootReducer });
 }
