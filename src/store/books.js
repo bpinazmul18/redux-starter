@@ -10,7 +10,7 @@ const slice = createSlice({
       books.push({
         id: ++lastId,
         bookName: action.payload.bookName,
-        isPaid: false,
+        isPaid: action.payload.isPaid,
       });
     },
   },
