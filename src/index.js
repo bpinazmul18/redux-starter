@@ -1,21 +1,21 @@
-import configureStore from "./store/configureStore";
-import {
-  bugAdded,
-  bugResolved,
-  bugAssignedToUser,
-  getBugsByUser,
-} from "./store/bugs";
-import { projectAdded } from "./store/projects";
-import { addedBook } from "./store/books";
-import { addedMember } from "./store/teams";
-import { userAdded } from "./store/users";
-
-const store = configureStore();
-
+// import configureStore from "./store/configureStore";
+// import {
+//   bugAdded,
+//   bugResolved,
+//   bugAssignedToUser,
+//   getBugsByUser,
+// } from "./store/bugs";
+// import { projectAdded } from "./store/projects";
+// import { addedBook } from "./store/books";
+// import { addedMember } from "./store/teams";
+// import { userAdded } from "./store/users";
+//
+// const store = configureStore();
+//
 // store.subscribe(() => {
 //   console.log("Store change", store.getState());
 // });
-
+//
 // store.dispatch(addedMember({ name: "Md Nazmul Haque", isPaidMember: false }));
 // store.dispatch(addedMember({ name: "Rafsan Jani", isPaidMember: true }));
 // store.dispatch(addedMember({ name: "Rubel Rana", isPaidMember: true }));
@@ -24,7 +24,7 @@ const store = configureStore();
 // store.dispatch(addedBook({ bookName: "Math", isPaid: false }));
 // store.dispatch(addedBook({ bookName: "English", isPaid: true }));
 // store.dispatch(addedBook({ bookName: "Javascript", isPaid: false }));
-
+//
 // store.dispatch(userAdded({ name: "User 1" }));
 // store.dispatch(userAdded({ name: "User 2" }));
 // store.dispatch(userAdded({ name: "User 3" }));
@@ -44,7 +44,7 @@ const store = configureStore();
 //
 // const bugs = getBugsByUser(2)(store.getState());
 // console.log(bugs);
-
+//
 // store.dispatch((dispatch, getState) => {
 //   dispatch({
 //     type: "bugReceived",
@@ -52,8 +52,21 @@ const store = configureStore();
 //   });
 //   console.log(getState());
 // });
+//
+// store.dispatch({
+//   type: "error",
+//   payload: { message: "An error occurred" },
+// });
+
+import configureStore from "./store/configureStore";
+
+const store = configureStore();
 
 store.dispatch({
-  type: "error",
-  payload: { message: "An error occurred" },
+  type: "apiCallBegan",
+  payload: {
+    url: "/bugs",
+    onSuccess: "bugsReceived",
+    onError: "apiRequestFailed",
+  },
 });
