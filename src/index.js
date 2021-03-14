@@ -58,10 +58,16 @@
 //   payload: { message: "An error occurred" },
 // });
 import configureStore from "./store/configureStore";
-import { addBug } from "./store/bugs";
+import { addBug, loadBugs, resolveBug, assignBuToUser } from "./store/bugs";
 const store = configureStore();
 
 // store.dispatch(loadBugs());
 //
 // setTimeout(() => store.dispatch(loadBugs()), 2000);
-store.dispatch(addBug({ description: "a" }));
+// store.dispatch(addBug());
+//
+// setTimeout(() => store.dispatch(resolveBug(1)), 2000);
+
+store.dispatch(loadBugs());
+
+setTimeout(() => store.dispatch(assignBuToUser(1, 4)), 2000);

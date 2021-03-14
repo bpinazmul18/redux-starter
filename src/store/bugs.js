@@ -3,7 +3,6 @@ import { createSelector } from "reselect";
 import { apiCallBegan } from "./api";
 import moment from "moment";
 
-let lastId = 0;
 const slice = createSlice({
   name: "bugs",
   initialState: {
@@ -28,15 +27,16 @@ const slice = createSlice({
     },
 
     bugAssignedToUser: (bugs, action) => {
-      const { bugId, userId } = action.payload;
+      const { id: bugId, userId } = action.payload;
       const index = bugs.list.findIndex((bug) => bug.id === bugId);
       bugs.list[index].userId = userId;
     },
-
+    // command - event
+    //addBug = bugAdded
     bugAdded: (bugs, action) => {
       bugs.list.push(action.payload);
     },
-
+    // resolveBug (command) - butResolved (event)
     bugResolved: (bugs, action) => {
       const index = bugs.list.findIndex((bug) => bug.id === action.payload.id);
       bugs.list[index].isResolved = true;
@@ -78,6 +78,24 @@ export const addBug = (bug) =>
     method: "post",
     data: bug,
     onSuccess: bugAdded.type,
+  });
+
+export const resolveBug = (id) =>
+  apiCallBegan({
+    // /bugs
+    // PATCH /bugs/1
+    url: url + "/" + id,
+    method: "patch",
+    data: { resolved: true },
+    onSuccess: bugResolved.type,
+  });
+
+export const assignBuToUser = (bugId, userId) =>
+  apiCallBegan({
+    url: url + "/" + bugId,
+    method: "patch",
+    data: { userId },
+    onSuccess: bugAssignedToUser.type,
   });
 
 //Selector
