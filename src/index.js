@@ -67,6 +67,5 @@ store.dispatch(
   actions.apiCallBegan({
     url: "/bugs",
     onSuccess: "bugsReceived",
-    onError: actions.apiCallFailed.type,
   })
 );
