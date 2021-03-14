@@ -12,6 +12,6 @@ describe("isEven", () => {
     // Function under test (SUT)
 
     const result = isEven(2);
-    expect(result).toEqual(false);
+    expect(result).toEqual(true);
   });
 });
